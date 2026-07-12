@@ -152,6 +152,76 @@ This project solves this by using a **TFLite fallback mechanism** inside `leaf.p
 
 ---
 
+## 🧠 Model Training & Deep Learning Pipeline
+
+The system is powered by a custom Convolutional Neural Network (CNN) built sequentially using Keras and TensorFlow. 
+
+### Model Architecture
+1. **Input Layer:** Accepts normalized images of size $128 \times 128 \times 3$ (RGB format).
+2. **Convolutional Block 1:** 
+   * `Conv2D` layer with 32 filters, a $3\times3$ kernel, and ReLU activation.
+   * `MaxPooling2D` layer with a $2\times2$ pool size to reduce spatial dimensions.
+3. **Convolutional Block 2:** 
+   * `Conv2D` layer with 32 filters, a $3\times3$ kernel, and ReLU activation.
+   * `MaxPooling2D` layer with a $2\times2$ pool size.
+4. **Flattening Layer:** Converts the 2D feature maps into a 1D vector.
+5. **Dense Block:** 
+   * Fully connected `Dense` layer with 128 neurons and ReLU activation.
+   * Penultimate feature extraction point (used for OOD activation checks).
+6. **Output Layer:** Fully connected `Dense` layer with 10 outputs using Sigmoid activation (compiled with `categorical_crossentropy` loss and Adam optimizer).
+
+### Training Configuration
+* **Optimization Algorithm:** Adam
+* **Loss Function:** Categorical Crossentropy
+* **Epochs:** 50
+* **Data Augmentation:** Real-time training augmentation including scaling, shear range (0.2), zoom range (0.2), and horizontal flips.
+
+---
+
+## 🛡️ Out-of-Distribution (OOD) Pipeline & Calibration
+
+To prevent the model from confidently classifying unrelated images (such as cars, pets, or household objects) as plant diseases, we implement a multi-stage validation pipeline:
+
+### 1. Color Masking (HSV Space)
+Images are converted to the Hue-Saturation-Value (HSV) color space to check for organic foliage tones. The mask filters for:
+* **Greens:** $Hue \in [35, 85]$
+* **Yellows & Browns:** $Hue \in [10, 35]$
+
+If the combined area of green, yellow, and brown pixels accounts for **less than 5%** of the total image area, the image is immediately flagged and rejected as non-foliage.
+
+### 2. Penultimate Feature Activation Checking
+For images that contain green/yellow elements but are not leaves (such as a green car), the app inspects the feature map activations of the neural network's final hidden dense layer. 
+
+We calibrated the network using test sets to determine the boundaries for in-distribution leaf images. Out-of-distribution (OOD) images trigger abnormally high feature values. The validation thresholds are:
+* **L2 Norm Threshold:** Reject if $> 52.0$
+* **Max Activation:** Reject if $> 21.0$
+* **Mean Activation:** Reject if $> 2.0$
+
+If any threshold is exceeded, the image is routed to `unrecognized.html`.
+
+---
+
+## 🗺️ Project Roadmap
+
+- [ ] **In-Browser Camera Capture:** Allow users to capture leaf photos directly via webcam/mobile camera.
+- [ ] **Multi-Crop Expansion:** Extend the model classes to diagnose diseases in potatoes, corn, and bell peppers.
+- [ ] **Edge Processing (TensorFlow.js):** Compile the lightweight TFLite model to TF.js to perform disease predictions entirely client-side without server dependencies.
+
+---
+
+## ❔ FAQ
+
+**Q: Why does the project use `opencv-python-headless` instead of standard `opencv-python`?**  
+**A:** Headless OpenCV is designed specifically for server environments (like Docker containers and PythonAnywhere). It does not require GUI dependencies (like GTK or Qt) which often crash cloud web servers.
+
+**Q: Why does the app support both `model.h5` and `model.tflite`?**  
+**A:** `model.h5` is the full TensorFlow model used for local development and prediction accuracy. `model.tflite` is a lightweight, compressed version of the model that runs with `tflite-runtime`. This is critical for deployment on low-memory servers (such as PythonAnywhere's 512MB free tier), preventing memory overflow crashes.
+
+**Q: How do I retrain the model with my own dataset?**  
+**A:** Place your images inside the `Dataset/train` and `Dataset/val` folders, run `python Training.py`, and run `python convert_to_tflite.py` to regenerate the lightweight model weights.
+
+---
+
 ## 📝 License & Open Source
 
 This project is open-source. Feel free to use, modify, and distribute it for educational, commercial, or research purposes.
