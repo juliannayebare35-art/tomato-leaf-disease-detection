@@ -42,7 +42,9 @@ graph TD
 
 ### Stack Detail
 * **Frontend:** HTML5, CSS3 (Custom Glassmorphism CSS design system in `glass.css`), Bootstrap 4.5.1, Vanilla JavaScript.
-* <img width="1897" height="909" alt="image" src="https://github.com/user-attachments/assets/8cbc5e52-75f3-453e-800b-9dd1922f46f2" />
+<img width="1897" height="909" alt="image" src="https://github.com/user-attachments/assets/8cbc5e52-75f3-453e-800b-9dd1922f46f2" />
+<img width="956" height="455" alt="image" src="https://github.com/user-attachments/assets/af2d57d3-e713-4ce8-a373-49cac9aa6ff7" />
+<img width="951" height="393" alt="image" src="https://github.com/user-attachments/assets/e3de2293-5b9d-4182-ad85-048fc2b5ca89" />
 
 * **Backend:** Python 3, Flask framework.
 * **Computer Vision:** OpenCV (`cv2`) for HSV color masking and foliage verification.
