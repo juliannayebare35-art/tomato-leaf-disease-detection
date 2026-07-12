@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tomato Leaf Disease Prediction and Treatment Tool">
+    <title>Tomato Leaf Disease Prediction</title>
+    <!-- Local Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Shared Glassmorphism CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glass.css') }}">
+</head>
+<body background="{{ url_for('static', filename='images/Background.jpg') }}">
+    <div class="page-wrapper d-flex flex-column justify-content-center align-items-center">
+        <div class="page-header mb-2">
+            <h1>Tomato Leaf Disease Prediction</h1>
+            <p>Predict Tomato Leaf Diseases & Get Treatments Instantly</p>
+        </div>
+
+        <div class="upload-section w-100">
+            <div class="upload-card">
+                <h2>Analyze Leaf Image</h2>
+                <p class="subtitle">Upload a close-up photo of a tomato leaf for diagnosis</p>
+
+                <form action="/predict" method="post" enctype="multipart/form-data" onsubmit="showLoading()" id="upload-form">
+                    <div class="upload-zone">
+                        <span class="upload-zone-icon">🌱</span>
+                        <p class="upload-zone-text" id="upload-text">Click or drag & drop leaf image here</p>
+                        <p class="upload-zone-hint">Supports JPEG, JPG, PNG (Max 5MB)</p>
+                        <input type="file" name="image" class="file-input-hidden" id="imageUpload" accept=".jpg,.jpeg,.png,.JPG,.PNG" required>
+                    </div>
+                    
+                    <div class="file-name-display" id="fileNameDisplay">No file selected</div>
+                    
+                    <button type="submit" class="btn-submit-glass mt-3" id="btn-predict">
+                        🔍 Diagnose Leaf
+                    </button>
+
+                    <div class="loading-overlay mt-3" id="loading">
+                        <div class="loading-spinner"></div>
+                        Scanning leaf features & predicting health...
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function() {
+            var name = this.files[0] ? this.files[0].name : 'No file selected';
+            document.getElementById('fileNameDisplay').textContent = name;
+            document.getElementById('upload-text').textContent = "Selected: " + name;
+        });
+
+        function showLoading() {
+            document.getElementById('btn-predict').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

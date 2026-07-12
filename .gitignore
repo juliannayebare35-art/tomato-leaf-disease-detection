@@ -1,0 +1,37 @@
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Virtual Environment
+Tenv/
+venv/
+ENV/
+env/
+.env
+.venv
+
+# Large Raw Datasets
+Dataset/
+
+# Big Archive files
+PLANT_DISEASE_PROJECT.zip
+*.zip
+*.tar.gz
+*.rar
+
+# User Uploads
+static/upload/*
+!static/upload/.gitkeep
+
+# IDE Configs
+.vscode/
+.idea/
+.gemini/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

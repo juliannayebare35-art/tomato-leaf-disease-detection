@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tomato Leaf Disease Prediction Result - Early Blight">
+    <title>Early Blight – Tomato Leaf Disease Prediction</title>
+    <!-- Local Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Shared Glassmorphism CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glass.css') }}">
+</head>
+<body background="{{ url_for('static', filename='images/back.jpg') }}">
+    <div class="page-wrapper">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="/" class="nav-brand">
+                <span class="nav-brand-icon">🍅</span>
+                <div>
+                    <span class="nav-brand-text">Tomato Leaf Disease Prediction</span>
+                    <span class="nav-brand-sub">Diagnosis System</span>
+                </div>
+            </a>
+            <a href="/" class="nav-back-btn">← Back to Upload</a>
+        </nav>
+
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Left Column: Image Comparison -->
+                <div class="col-lg-5 col-md-12 mb-4">
+                    <div class="image-frame">
+                        <!-- User's Uploaded Image Card -->
+                        <div class="image-card mb-4" style="border-color: rgba(255,255,255,0.15);">
+                            <img src="{{ url_for('static', filename='upload/' + user_image) }}" 
+                                 alt="Your Uploaded Leaf" 
+                                 onerror="this.style.display='none'; document.getElementById('user-img-error').style.display='flex';">
+                            <div class="image-card-label">
+                                📸 Your Uploaded Leaf
+                            </div>
+                            <div id="user-img-error" style="display:none; height:460px; justify-content:center; align-items:center; flex-direction:column; background:rgba(0,0,0,0.6); color:rgba(255,255,255,0.7);">
+                                <span style="font-size:3rem; margin-bottom:12px;">🖼️</span>
+                                <span>Image unavailable</span>
+                            </div>
+                        </div>
+
+                        <!-- Disease Reference Image Card -->
+                        <div class="image-card" style="border-color: rgba(255,255,255,0.15);">
+                            <img src="{{ url_for('static', filename='images/Tomato___Early_blight.JPG') }}" 
+                                 alt="Disease Reference Standard">
+                            <div class="image-card-label">
+                                📖 Diagnosis Reference Standard
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Info Panel -->
+                <div class="col-lg-7 col-md-12">
+                    <div class="result-panel">
+                        <!-- Status Banner (Green for Healthy, Red/Orange for Disease) -->
+                        <div class="result-status-banner disease">
+                            <span class="result-status-icon">⚠️</span>
+                            <div class="result-status-text">
+                                <h2>{{ pred_output }}</h2>
+                                <p>Infection detected. Treatment recommended.</p>
+                            </div>
+                        </div>
+
+                        <!-- Result Details Body -->
+                        <div class="result-body">
+                            <!-- Treatment / Description Block -->
+                            <div class="info-block red">
+                                <div class="info-block-title">🩹 Recommended Treatment Plan</div>
+                                <p>Tomatoes that have early blight require immediate attention before the disease takes over the plants. Thoroughly spray the plant (bottoms of leaves also) with Bonide Liquid Copper Fungicide concentrate or Bonide Tomato & Vegetable. Both of these treatments are organic..</p>
+                            </div>
+
+                            <!-- Care Quick Tips -->
+                            <div class="info-block blue">
+                                <div class="info-block-title">📋 Essential Preventive Measures</div>
+                                <ul>
+                                    <li>Ensure proper spacing between tomato plants for optimal airflow.</li>
+                                    <li>Water at the base of the plant (drip irrigation) to avoid wet leaves.</li>
+                                    <li>Remove any dead or weed plants surrounding your tomato crops.</li>
+                                    <li>Clean tools thoroughly before pruning or handling healthy plants.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="action-area mt-4">
+                                <a href="/" class="btn-primary-glass">🔄 Diagnose Another Leaf</a>
+                                <a href="/" class="btn-secondary-glass">🏠 Go Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

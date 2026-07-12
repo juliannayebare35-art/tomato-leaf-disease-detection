@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tomato Leaf Disease Prediction - Image Not Recognized">
+    <title>Image Not Recognized – Tomato Leaf Disease Prediction</title>
+    <!-- Local Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Shared Glassmorphism CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glass.css') }}">
+</head>
+<body background="{{ url_for('static', filename='images/back.jpg') }}">
+    <div class="page-wrapper">
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="/" class="nav-brand">
+                <span class="nav-brand-icon">🍅</span>
+                <div>
+                    <span class="nav-brand-text">Tomato Leaf Disease Prediction</span>
+                    <span class="nav-brand-sub">Diagnosis System</span>
+                </div>
+            </a>
+            <a href="/" class="nav-back-btn">← Back to Upload</a>
+        </nav>
+
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Left Column: Uploaded Image -->
+                <div class="col-lg-5 col-md-12 mb-4">
+                    <div class="image-frame">
+                        <div class="image-card" style="border-color: rgba(231, 76, 60, 0.5); box-shadow: 0 12px 40px rgba(231, 76, 60, 0.3);">
+                            <img src="{{ url_for('static', filename='upload/' + user_image) }}" 
+                                 alt="Uploaded Image" 
+                                 onerror="this.style.display='none'; document.getElementById('img-error').style.display='flex';">
+                            <div class="image-card-label" style="background: rgba(231, 76, 60, 0.8);">
+                                ⚠️ Scan Reference
+                            </div>
+                            <!-- Error state -->
+                            <div id="img-error" style="display:none; height:460px; justify-content:center; align-items:center; flex-direction:column; background:rgba(0,0,0,0.6); color:rgba(255,255,255,0.7);">
+                                <span style="font-size:3rem; margin-bottom:12px;">🖼️</span>
+                                <span>Image unavailable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Info Panel -->
+                <div class="col-lg-7 col-md-12">
+                    <div class="result-panel">
+                        <!-- Red warning header -->
+                        <div class="result-status-banner warning">
+                            <span class="result-status-icon">⚠️</span>
+                            <div class="result-status-text">
+                                <h2>Image Not Recognized</h2>
+                                <p>Out-of-Distribution or Non-Leaf Image Detected</p>
+                            </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="result-body">
+                            <!-- What Happened -->
+                            <div class="info-block red">
+                                <div class="info-block-title">💡 Why was it rejected?</div>
+                                <p>Our AI model checked the uploaded image and could not confirm it as a valid tomato leaf. The image was rejected due to one of the following reasons:</p>
+                                <ul class="mt-2">
+                                    <li><strong>Missing foliage colors:</strong> Less than 5% of pixels show expected leaf tones (green, yellow, brown).</li>
+                                    <li><strong>Unrelated content:</strong> The image contains human faces, background clutter, animals, or non-plant subjects.</li>
+                                    <li><strong>Out of distribution:</strong> The leaf or shape structure does not match our dataset patterns.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Supported Classes -->
+                            <div class="info-block blue">
+                                <div class="info-block-title">📋 Supported Tomato Categories</div>
+                                <p class="mb-2">Currently, our system is calibrated specifically to diagnose the following 10 tomato leaf classes:</p>
+                                <div class="class-grid">
+                                    <div class="class-item"><span class="class-dot"></span> Bacterial Spot</div>
+                                    <div class="class-item"><span class="class-dot"></span> Early Blight</div>
+                                    <div class="class-item"><span class="class-dot"></span> Late Blight</div>
+                                    <div class="class-item"><span class="class-dot"></span> Leaf Mold</div>
+                                    <div class="class-item"><span class="class-dot"></span> Septoria Leaf Spot</div>
+                                    <div class="class-item"><span class="class-dot"></span> Target Spot</div>
+                                    <div class="class-item"><span class="class-dot"></span> Tomato Yellow Leaf Curl</div>
+                                    <div class="class-item"><span class="class-dot"></span> Tomato Mosaic Virus</div>
+                                    <div class="class-item"><span class="class-dot"></span> Two-Spotted Spider Mite</div>
+                                    <div class="class-item"><span class="class-dot" style="background:#3498db;"></span> Healthy Leaf</div>
+                                </div>
+                            </div>
+
+                            <!-- Expansion Plan -->
+                            <div class="info-block purple">
+                                <div class="info-block-title">🚀 Retraining & Scaling Plan</div>
+                                <p>Every AI system grows through more training. We are currently actively expanding this system's capabilities. Retraining plans include:</p>
+                                <div class="tag-group">
+                                    <span class="tag">More Plant Species</span>
+                                    <span class="tag">More Disease Types</span>
+                                    <span class="tag">Deeper CNNs</span>
+                                    <span class="tag">Larger Datasets</span>
+                                    <span class="tag">Confidence Scores</span>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="action-area mt-4">
+                                <a href="/" class="btn-primary-glass">🔄 Upload New Image</a>
+                                <a href="/" class="btn-secondary-glass">🏠 Go Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
