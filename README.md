@@ -42,6 +42,8 @@ graph TD
 
 ### Stack Detail
 * **Frontend:** HTML5, CSS3 (Custom Glassmorphism CSS design system in `glass.css`), Bootstrap 4.5.1, Vanilla JavaScript.
+* <img width="1897" height="909" alt="image" src="https://github.com/user-attachments/assets/8cbc5e52-75f3-453e-800b-9dd1922f46f2" />
+
 * **Backend:** Python 3, Flask framework.
 * **Computer Vision:** OpenCV (`cv2`) for HSV color masking and foliage verification.
 * **Deep Learning Inference:**
