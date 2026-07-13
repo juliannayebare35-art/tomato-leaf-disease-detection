@@ -10,7 +10,7 @@ A modern, deep learning-powered web application designed to help farmers, agrono
 ![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
 
 ---
-
+##✨️Problem statement 
 ## 🌟 Key Features
 
 1. **Instant AI Diagnosis:** Upload a close-up image of a tomato leaf, and the custom deep learning model classifies it into one of 10 categories (9 diseases + healthy state) in milliseconds.
