@@ -1,4 +1,5 @@
 # 🍅 Tomato Leaf Disease Detection Using Convolutional Neural Networks (CNNs)
+##*A Case of Mubuku Irrigation Scheme, Nyambwamba Division, Kasese**
 
 A modern, deep learning-powered web application designed to help farmers, agronomists, and garden enthusiasts instantly diagnose tomato leaf diseases and receive actionable, science-backed organic and chemical treatment recommendations.
 
