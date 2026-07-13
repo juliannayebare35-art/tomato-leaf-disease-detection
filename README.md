@@ -1,4 +1,4 @@
-# 🍅 Tomato Leaf Care — Plant Disease Prediction System
+# 🍅 Tomato Leaf Care — Plant Disease Prediction System*
 
 A modern, deep learning-powered web application designed to help farmers, agronomists, and garden enthusiasts instantly diagnose tomato leaf diseases and receive actionable, science-backed organic and chemical treatment recommendations.
 
